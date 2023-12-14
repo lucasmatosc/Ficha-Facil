@@ -1,20 +1,20 @@
 import { useState } from "react";
 import styles from "./styles.module.css"
-import { ref } from "firebase/database"
-import { db } from "../firebaseConfig";
+import { doc, updateDoc, increment } from "firebase/firestore"
+import  db  from "../firebaseConfig";
 
 export default function SeuComponente() {
     const [buttonText, setButtonText] = useState('Tenho interesse');
     const [buttonDisabled, setButtonDisabled] = useState(false);
-  
+
     const handleButtonClick = async () => {
-      const counterRef = db.ref('contador');
+      const counterRef = doc(db, 'contadores', 'teste')
 
       try {
-        await db.ref().update({
-          contador: (await counterRef.once('value')).val() + 1,
-        });
-  
+        await updateDoc(counterRef, {
+          valor: increment(1)
+        })
+
         setButtonText('Obrigado pelo seu apoio!');
         setButtonDisabled(true);
       } catch (error) {
