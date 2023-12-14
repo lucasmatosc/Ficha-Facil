@@ -1,7 +1,16 @@
 import Head from 'next/head';
+import { useState } from 'react';
 import styles from '../styles/Home.module.css';
+import Button from '../components/button';
 
 export default function Home() {
+
+  const [buttonText, setButtonText] = useState('Tenho interesse');
+
+  const changeButton = () => {
+    setButtonText('Obrigado pelo seu apoio!');
+  };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -14,15 +23,14 @@ export default function Home() {
           E se fosse possível comprar fichas do Restaurante Universitário com Pix? 
         </h1>
 
-        <p className={styles.description}>
-          
-        </p>
-
         <div className={styles.grid}>
-            <h3>Diga-nos se você tem interesse na proposta 😃</h3>
-          
-          
-          
+            <h2>Diga-nos se você tem interesse na proposta 😃</h2>
+            <h3>Precisamos da sua opinião para darmos andamento ao projeto </h3>
+
+            <div>
+              <Button onClickFunction={changeButton} />
+            </div>
+
         </div>
       </main>
 
